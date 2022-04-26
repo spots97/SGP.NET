@@ -31,6 +31,12 @@ namespace SGPdotNET.Propagation
         private bool _useSimpleModel;
 
         /// <summary>
+        /// Gets the Common SGP4 constants that were initiallized
+        /// when the <see cref="Sgp4"/> object was created.
+        /// </summary>
+        public CommonConstants CommonConsts { get => _commonConsts; }
+
+        /// <summary>
         ///     Constructor
         /// </summary>
         /// <param name="tle">The two-line element set to propogate</param>
@@ -1307,7 +1313,7 @@ namespace SGPdotNET.Propagation
             _integratorParams = EmptyIntegratorParams;
         }
 
-        private struct CommonConstants
+        public struct CommonConstants
         {
             public double Cosio;
             public double Sinio;
