@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageId>SGP.NET</PackageId>
     <Version>1.3.0</Version>
-    <Authors>parzivail, spots97</Authors>
+    <Authors>parzivail</Authors>
     <Company>parzivail</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/parzivail/SGP.NET</PackageProjectUrl>
@@ -20,12 +20,11 @@
     <FileVersion>1.3.0.0</FileVersion>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10</LangVersion>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\README.md">
-      <Pack>True</Pack>
+      <Pack>False</Pack>
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
