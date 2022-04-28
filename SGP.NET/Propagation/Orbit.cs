@@ -12,27 +12,27 @@ namespace SGPdotNET.Propagation
         /// <summary>
         ///     The XMO mean anomoly
         /// </summary>
-        public Angle MeanAnomoly { get; }
+        public Angle MeanAnomoly { get; internal init; }
 
         /// <summary>
         ///     The XNODEO right ascension of the ascending node
         /// </summary>
-        public Angle AscendingNode { get; }
+        public Angle AscendingNode { get; internal init; }
 
         /// <summary>
         ///     The OMEGAO argument of perigree
         /// </summary>
-        public Angle ArgumentPerigee { get; }
+        public Angle ArgumentPerigee { get; internal init; }
 
         /// <summary>
         ///     The XNO mean motion, in revolutions per day
         /// </summary>
-        public double MeanMotion { get; }
+        public double MeanMotion { get; internal init; }
 
         /// <summary>
         ///     The AODP recovered semi-major axis
         /// </summary>
-        public double RecoveredSemiMajorAxis { get; }
+        public double RecoveredSemiMajorAxis { get; internal init; }
 
         /// <summary>
         ///     The semi-major axis, in kilometers
@@ -42,42 +42,42 @@ namespace SGPdotNET.Propagation
         /// <summary>
         ///     The XNODP recovered mean motion
         /// </summary>
-        public double RecoveredMeanMotion { get; }
+        public double RecoveredMeanMotion { get; internal init; }
 
         /// <summary>
         ///     The perigree, in kilometers
         /// </summary>
-        public double Perigee { get; }
+        public double Perigee { get; internal init; }
 
         /// <summary>
         ///     The apogee, in kilometers
         /// </summary>
-        public double Apogee { get; }
+        public double Apogee { get; internal init; }
 
         /// <summary>
         ///     Time, in minutes, of revolution (recovered from 2pi / RecoveredMeanMotion)
         /// </summary>
-        public double Period { get; }
+        public double Period { get; internal init; }
 
         /// <summary>
         ///     The epoch of the element
         /// </summary>
-        public DateTime Epoch { get; }
+        public DateTime Epoch { get; internal init; }
 
         /// <summary>
         ///     BSTAR drag term
         /// </summary>
-        public double BStar { get; }
+        public double BStar { get; internal init; }
 
         /// <summary>
         ///     Eccentricity
         /// </summary>
-        public double Eccentricity { get; }
+        public double Eccentricity { get; internal init; }
 
         /// <summary>
         ///     Inclination
         /// </summary>
-        public Angle Inclination { get; }
+        public Angle Inclination { get; internal init; }
 
         /// <summary>
         ///     Creates a new numerical orbital element descriptor set for the provided two-line element set
@@ -117,6 +117,11 @@ namespace SGPdotNET.Propagation
             Apogee = (RecoveredSemiMajorAxis * (1.0 + Eccentricity) - SgpConstants.DistanceUnitsPerEarthRadii) *
                      SgpConstants.EarthRadiusKm;
             Period = SgpConstants.TwoPi / RecoveredMeanMotion;
+        }
+
+        internal Orbit()
+        {
+
         }
 
         /// <inheritdoc />

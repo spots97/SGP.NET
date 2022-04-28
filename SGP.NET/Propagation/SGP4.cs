@@ -394,6 +394,74 @@ namespace SGPdotNET.Propagation
                 _commonConsts.Cosio, _commonConsts.Sinio);
         }
 
+        public Orbit GetPropagatedOrbitSgp4(double tsince)
+        {
+            var xmdf = Orbit.MeanAnomoly.Radians
+                       + _commonConsts.Xmdot * tsince;
+            var omgadf = Orbit.ArgumentPerigee.Radians
+                         + _commonConsts.Omgdot * tsince;
+            var xnoddf = Orbit.AscendingNode.Radians
+                         + _commonConsts.Xnodot * tsince;
+
+            var tsq = tsince * tsince;
+            var xnode = xnoddf + _commonConsts.Xnodcf * tsq;
+            var tempa = 1.0 - _commonConsts.C1 * tsince;
+            var tempe = Orbit.BStar * _commonConsts.C4 * tsince;
+
+            var omega = omgadf;
+            var xmp = xmdf;
+
+            if (!_useSimpleModel)
+            {
+                var delomg = _nearspaceConsts.Omgcof * tsince;
+                var delm = _nearspaceConsts.Xmcof
+                           * (Math.Pow(1.0 + _commonConsts.Eta * Math.Cos(xmdf), 3.0)
+                              * -_nearspaceConsts.Delmo);
+                var temp = delomg + delm;
+
+                xmp += temp;
+                omega -= temp;
+
+                var tcube = tsq * tsince;
+                var tfour = tsince * tcube;
+
+                tempa = tempa - _nearspaceConsts.D2 * tsq - _nearspaceConsts.D3
+                        * tcube - _nearspaceConsts.D4 * tfour;
+                tempe += Orbit.BStar * _nearspaceConsts.C5
+                                     * (Math.Sin(xmp) - _nearspaceConsts.Sinmo);
+            }
+
+            var a = Orbit.RecoveredSemiMajorAxis * tempa * tempa;
+            var e = Orbit.Eccentricity - tempe;
+
+            /*
+             * fix tolerance for error recognition
+             */
+            if (e <= -0.001)
+                throw new SatellitePropagationException("Error: (e <= -0.001)");
+            if (e < 1.0e-6)
+                e = 1.0e-6;
+            else if (e > 1.0 - 1.0e-6)
+                e = 1.0 - 1.0e-6;
+
+            return new Orbit()
+            {
+                Apogee = Orbit.Apogee,
+                ArgumentPerigee = Angle.FromRadians(omega),
+                AscendingNode = xnode,
+                BStar = Orbit.BStar,
+                Eccentricity = e,
+                Epoch = Orbit.Epoch,
+                Inclination = Orbit.Inclination,
+                MeanAnomoly = Orbit.MeanAnomoly, // NOTE: Is it XMP?
+                MeanMotion = Orbit.MeanMotion,
+                Perigee = Orbit.Perigee,
+                Period = Orbit.Period,
+                RecoveredMeanMotion = Orbit.RecoveredMeanMotion,
+                RecoveredSemiMajorAxis = a//Orbit.RecoveredSemiMajorAxis
+            };
+        }
+
         private EciCoordinate CalculateFinalPositionVelocity(
             double tsince,
             double e,
