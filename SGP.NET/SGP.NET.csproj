@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>SGP.NET</PackageId>
-    <Version>1.3.0</Version>
+    <Version>1.3.1-a</Version>
     <Authors>parzivail, spots97</Authors>
     <Company>parzivail</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -15,11 +15,11 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb;.xml</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <Description>C# SGP4 Satellite Prediction Library. Multi-function library with support for loading satellites from TLEs, converting between coordinate systems and reference frames, observing satellites from ground stations, and creating schedules of observations over periods of time.</Description>
     <RootNamespace>SGPdotNET</RootNamespace>
-    <PackageReleaseNotes>Added netstandard2.0 target</PackageReleaseNotes>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <FileVersion>1.3.0.0</FileVersion>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10</LangVersion>
+    <PackageReleaseNotes>Re-Added netstandard2.0 target</PackageReleaseNotes>
+    <AssemblyVersion>1.3.0.1</AssemblyVersion>
+    <FileVersion>1.3.0.1</FileVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>9</LangVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
