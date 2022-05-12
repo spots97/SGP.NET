@@ -448,7 +448,7 @@ namespace SGPdotNET.Propagation
             {
                 Apogee = Orbit.Apogee,
                 ArgumentPerigee = Angle.FromRadians(omega),
-                AscendingNode = xnode,
+                AscendingNode = Angle.FromRadians(xnode),
                 BStar = Orbit.BStar,
                 Eccentricity = e,
                 Epoch = Orbit.Epoch,
